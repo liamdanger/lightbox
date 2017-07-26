@@ -10,7 +10,7 @@ module.exports = {
 
   // Inform the rest of the app of a new state
   _dispatchEvent: function(newState) {
-    const event = new Event('render', newState);
+    const event = new Event('state:change', newState);
     document.dispatchEvent(event);
   },
 
@@ -18,7 +18,7 @@ module.exports = {
   set: function(obj) {
     const newState = Object.assign({}, this.current);
 
-    // Add/update properties to form new state
+    // Add/update properties on new state
     Object.keys(obj).map((key) => {
       newState[key] = obj[key]
     });
@@ -27,5 +27,21 @@ module.exports = {
     this._dispatchEvent(newState);
 
     return newState;
+  },
+
+  // Returns true if any of the keys in the array differ from previous
+  changed: function(props) {
+    let anyDifferent = false;
+
+    for(let i = 0; i < props.length; i++) {
+      let prop = props[i];
+
+      if (this.prev[prop] != this.current[prop]) {
+        anyDifferent = true;
+        break;
+      }
+    }
+
+    return anyDifferent;
   }
 }

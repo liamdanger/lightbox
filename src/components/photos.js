@@ -1,14 +1,25 @@
 module.exports = (state) => {
-  let el = document.createElement('div');
+  const el = document.createElement('div');
+  const props = ["photos"];
 
   el.id = "photos";
-  el.innerHTML = `
-    <ul class="photo-grid">
-      ${renderPhotos(state.current.photos).join('')}
-    </ul>
-  `;
+  render(el, state);
+
+  document.addEventListener('state:change', () => {
+    if (state.changed(props)) {
+      render(el, state);
+    }
+  });
 
   return el;
+}
+
+function render(el, state) {
+  el.innerHTML = `
+    <ul class="photo-grid">
+      ${renderPhotos(state.current.photos)}
+    </ul>
+  `;
 }
 
 function renderPhotos(photos) {
@@ -18,5 +29,5 @@ function renderPhotos(photos) {
         ${photo.title}
       </li>
     `;
-  });
+  }).join('');
 }
