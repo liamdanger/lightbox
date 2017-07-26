@@ -1,33 +1,35 @@
+const { send, receive } = require('../events.js');
+
 module.exports = (state) => {
   const el = document.createElement('div');
   const props = ["photos"];
 
-  el.id = "photos";
-  render(el, state);
+  el.innerHTML = render(state);
 
-  document.addEventListener('state:change', () => {
+  receive('state:change', () => {
     if (state.changed(props)) {
-      render(el, state);
+      el.innerHTML = render(state);
     }
   });
 
   return el;
 }
 
-function render(el, state) {
-  el.innerHTML = `
+function render(state) {
+  return `
     <ul class="photo-grid">
       ${renderPhotos(state.current.photos)}
     </ul>
   `;
+
+  function renderPhotos(photos) {
+    return photos.map((photo) => {
+      return `
+        <li class="photo-grid-item">
+          ${photo.title}
+        </li>
+      `;
+    }).join('');
+  }
 }
 
-function renderPhotos(photos) {
-  return photos.map((photo) => {
-    return `
-      <li class="photo-grid-item">
-        ${photo.title}
-      </li>
-    `;
-  }).join('');
-}

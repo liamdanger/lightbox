@@ -1,3 +1,5 @@
+const { send, receive } = require('./events.js');
+
 module.exports = {
   current: {},
   prev: {},
@@ -6,12 +8,6 @@ module.exports = {
   _replaceState: function(newState) {
     this.prev    = this.current;
     this.current = newState;
-  },
-
-  // Inform the rest of the app of a new state
-  _dispatchEvent: function(newState) {
-    const event = new Event('state:change', newState);
-    document.dispatchEvent(event);
   },
 
   // Merge new set of values to create new current state
@@ -24,7 +20,8 @@ module.exports = {
     });
 
     this._replaceState(newState);
-    this._dispatchEvent(newState);
+
+    send('state:change', newState);
 
     return newState;
   },
