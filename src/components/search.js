@@ -1,8 +1,6 @@
 const searchGifs = require('../giphy.js');
 const { send, receive } = require('../events.js');
 
-window.searchGifs = searchGifs;
-
 module.exports = (state) => {
   const el = document.createElement('div');
 
@@ -15,7 +13,7 @@ module.exports = (state) => {
 }
 
 function bind(el, state) {
-  const form = el.getElementsByClassName('search-form')[0];
+  const form = el.querySelector('.search-form');
 
   form.addEventListener('submit', (e) => {
     submitSearch(e, state)

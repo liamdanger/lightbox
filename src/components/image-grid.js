@@ -10,7 +10,7 @@ module.exports = (state) => {
   receive('state:change', () => {
     if (state.changed(props)) {
       el.innerHTML = render(state);
-      bind(el);
+      bind(el, state);
     }
   });
 
@@ -19,13 +19,11 @@ module.exports = (state) => {
 
 function render(state) {
   const renderImages = (images) => (
-    images.map((image) => {
-      return `
-        <li class="image-grid-item">
-          <img src="${image.preview.url}" />
-        </li>
-      `;
-    }).join('')
+    images.map((image) => (`
+      <li id="${image.id}" class="image-grid-item">
+        <img src="${image.preview.url}" />
+      </li>`)
+    ).join('')
   );
 
   return `
@@ -36,5 +34,11 @@ function render(state) {
 }
 
 function bind(el, state) {
-  const images = el.getElementsByClassName('image-grid-item');
+  const images = el.querySelectorAll('.image-grid-item');
+
+  images.forEach((image) => {
+    image.addEventListener('click', (e) => {
+      state.set({ LIGHTBOX_OPEN: true, IMAGE_SHOWING: image.id });
+    });
+  });
 }
