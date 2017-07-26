@@ -1,6 +1,6 @@
 module.exports = {
-  send: (name, data) => {
-    const event = new Event(name, data);
+  send: (name) => {
+    const event = new Event(name);
     document.dispatchEvent(event);
   },
 

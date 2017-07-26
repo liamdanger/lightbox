@@ -9,10 +9,21 @@ module.exports = (q) => {
     const xhr = new XMLHttpRequest();
 
     xhr.open('GET', request);
-    xhr.onload = () => resolve(xhr.responseText); 
+    xhr.onload = () => resolve(formatResponse(JSON.parse(xhr.responseText))); 
     xhr.onerror = () => reject(xhr.statusText);
     xhr.send();
   });
+}
+
+function formatResponse(response) {
+  return response.data.map((item) => (
+    {
+      preview: item.images.fixed_width_still,
+      original: item.images.original,
+      id: item.id,
+      url: item.embed_url
+    }
+  ));
 }
 
 function constructRequest(key, q) {

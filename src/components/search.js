@@ -1,4 +1,7 @@
+const searchGifs = require('../giphy.js');
 const { send, receive } = require('../events.js');
+
+window.searchGifs = searchGifs;
 
 module.exports = (state) => {
   const el = document.createElement('div');
@@ -6,24 +9,39 @@ module.exports = (state) => {
   el.id = "search";
   el.innerHTML = render();
 
-  const form = el.getElementsByClassName('search-form')[0];
-  form.onsubmit = submitSearch;
+  bind(el, state);
 
   return el;
 }
 
-function submitSearch(e) {
-  e.preventDefault();
+function bind(el, state) {
+  const form = el.getElementsByClassName('search-form')[0];
 
-  console.log(this);
+  form.addEventListener('submit', (e) => {
+    submitSearch(e, state)
+  });
 }
 
 function render() {
   return `
     <form class="search-form">
-      <input name="q" type="search" />
+      <input id="search-form-q" name="q" type="search" />
       <button>🔍</button>
     </form>
   `;
 }
 
+function submitSearch(e, state) {
+  e.preventDefault();
+
+  const input = document.getElementById('search-form-q');
+  const query = input.value;
+
+  // Clear field on successful search
+  input.value = "";
+
+  searchGifs(query)
+    .then((images) => {
+      state.set({images});
+    })
+}

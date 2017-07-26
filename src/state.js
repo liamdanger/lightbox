@@ -1,5 +1,9 @@
 const { send, receive } = require('./events.js');
 
+receive('state:change', (e) => {
+  console.log(e);
+});
+
 module.exports = {
   current: {},
   prev: {},
@@ -21,7 +25,7 @@ module.exports = {
 
     this._replaceState(newState);
 
-    send('state:change', newState);
+    send('state:change');
 
     return newState;
   },
