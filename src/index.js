@@ -12,6 +12,7 @@ state.set({
 
 // Temporarily exposing state for inspection
 window.state = state;
+window.searchGiphy = require('./giphy.js');
 
 const main = document.createElement('main');
 main.appendChild(search(state));
