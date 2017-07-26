@@ -4,9 +4,7 @@ const { send, receive } = require('../events.js');
 module.exports = (state) => {
   const el = document.createElement('div');
 
-  el.id = "search";
   el.innerHTML = render();
-
   bind(el, state);
 
   return el;

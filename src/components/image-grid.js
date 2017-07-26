@@ -4,9 +4,6 @@ module.exports = (state) => {
   const el = document.createElement('div');
   const props = ["images"];
 
-  el.innerHTML = render(state);
-  bind(el, state);
-
   receive('state:change', () => {
     if (state.changed(props)) {
       el.innerHTML = render(state);
