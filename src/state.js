@@ -1,9 +1,5 @@
 const { send, receive } = require('./events.js');
 
-receive('state:change', (e) => {
-  console.log(e);
-});
-
 module.exports = {
   current: {},
   prev: {},
@@ -12,6 +8,8 @@ module.exports = {
   _replaceState: function(newState) {
     this.prev    = this.current;
     this.current = newState;
+
+    console.log(this.current);
   },
 
   // Merge new set of values to create new current state
@@ -35,7 +33,7 @@ module.exports = {
     let anyDifferent = false;
 
     for(let i = 0; i < props.length; i++) {
-      let prop = props[i];
+      const prop = props[i];
 
       if (this.prev[prop] != this.current[prop]) {
         anyDifferent = true;

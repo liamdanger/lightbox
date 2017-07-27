@@ -35,7 +35,10 @@ function bind(el, state) {
 
   images.forEach((image) => {
     image.addEventListener('click', (e) => {
-      state.set({ LIGHTBOX_OPEN: true, IMAGE_SHOWING: image.id });
+      state.set({ 
+        LIGHTBOX_OPEN: true, 
+        IMAGE_SHOWING: image.id 
+      });
     });
   });
 }
