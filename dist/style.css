@@ -26,5 +26,7 @@ body {
 
 .search-form-button {
   appearance: none;
-  border: 0;
+  border: 3px solid #939acb;
+  background-color: #fff;
+  font-size: 32px;
 }
