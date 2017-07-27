@@ -61,9 +61,11 @@ input:focus {
 }
 
 .image-grid-item {
+  cursor: pointer;
   margin: 24px 16px;
   transition: transform 0.25s ease;
 }
+.image-grid-item:hover,
 .image-grid-item:focus {
   outline: 0;
   transform: scale(1.1);
