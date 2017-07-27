@@ -32,10 +32,32 @@ function render(state) {
 }
 
 function bind(el, state) {
+  const { images, IMAGE_SHOWING } = state.current;
+
   const close = el.querySelector('.lightbox-close');
   close.addEventListener('click', (e) => {
     state.set({ LIGHTBOX_OPEN: false });
   });
+
+  const next = el.querySelector('.lightbox-next');
+  next.addEventListener('click', (e) => {
+    state.set({ IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, 1).id });
+  });
+
+  const prev = el.querySelector('.lightbox-prev');
+  prev.addEventListener('click', (e) => {
+    state.set({ IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, -1).id });
+  });
+}
+
+function getSiblingImage(images, IMAGE_SHOWING, delta) {
+  const image = getCurrentImage(images, IMAGE_SHOWING);
+  let position = images.indexOf(image) + delta;
+
+  if (position >= images.length) { position = 0 }
+  if (position <= -1) { position = images.length - 1 }
+
+  return images[position];
 }
 
 function getCurrentImage(images, IMAGE_SHOWING) {
