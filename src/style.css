@@ -75,11 +75,55 @@ input:focus {
   display: block;
 }
 
+/* LIGHTBOX */
+
+.lightbox {
+  max-width: 90%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 2;
+}
+.lightbox-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.lightbox-image {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.lightbox-button {
+  position: absolute;
+}
+.lightbox-close {
+  top: -24px;
+  right: -24px;
+}
+.lightbox-prev {
+  bottom: -24px;
+  left: -24px;
+}
+.lightbox-next {
+  bottom: -24px;
+  right: -24px;
+}
+
 /* GENERICS AND UTILITES */
 
 .circle-button {
+  border: 0;
   border-radius: 100%;
   background-color: #fff;
+  font-size: 20px;
   height: 48px;
   width: 48px;
+  text-align: center;
 }
