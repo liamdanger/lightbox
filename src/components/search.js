@@ -36,8 +36,14 @@ function submitSearch(e, state) {
   // Clear field on successful search
   input.value = "";
 
+  send('search:submit');
+
   searchGifs(query)
     .then((images) => {
-      state.set({images});
-    })
+      state.set({
+        images,
+        IMAGE_SHOWING: '',
+        LIGHTBOX_OPEN: false 
+      });
+    });
 }
