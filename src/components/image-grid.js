@@ -17,7 +17,7 @@ module.exports = (state) => {
 function render(state) {
   const renderImages = (images) => (
     images.map((image) => (`
-      <li id="${image.id}" class="image-grid-item">
+      <li tabindex="0" id="${image.id}" class="image-grid-item">
         <img src="${image.preview.url}" />
       </li>`)
     ).join('')
