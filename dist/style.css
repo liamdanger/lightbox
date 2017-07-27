@@ -1,0 +1,30 @@
+* { box-sizing: border-box; }
+
+body {
+  font-size: 20px;
+  margin: 0;
+}
+
+.search-form {
+  background-color: #f484a1;
+
+  padding: 24px;
+  display: flex;
+  width: 100%;
+}
+
+.search-form-field {
+  appearance: none;
+  border: 0;
+  border-radius: 7px;
+
+  flex-grow: 1;
+}
+.search-form-field:focus { 
+  outline: 0; 
+}
+
+.search-form-button {
+  appearance: none;
+  border: 0;
+}

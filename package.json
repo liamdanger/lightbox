@@ -4,8 +4,8 @@
   "description": "take-home assignment",
   "main": "index.js",
   "scripts": {
-    "dev": "budo ./src/index.js -t es2040",
-    "build": "browserify ./src/index.js -o ./dist/bundle.js -t es2040",
+    "dev": "budo ./src/index.js -t es2040 --css ./src/style.css",
+    "build": "browserify ./src/index.js -t es2040 -o ./dist/bundle.js && cp ./src/style.css ./dist/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

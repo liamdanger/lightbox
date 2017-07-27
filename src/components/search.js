@@ -21,8 +21,8 @@ function bind(el, state) {
 function render() {
   return `
     <form class="search-form">
-      <input id="search-form-q" name="q" type="search" />
-      <button>🔍</button>
+      <input class="search-form-field" id="search-form-q" name="q" type="search" />
+      <button class="search-form-button" title="Search">🔍</button>
     </form>
   `;
 }
