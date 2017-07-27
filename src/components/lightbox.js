@@ -40,14 +40,16 @@ function bind(el, state) {
   });
 
   const next = el.querySelector('.lightbox-next');
-  next.addEventListener('click', (e) => {
-    state.set({ IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, 1).id });
-  });
+  next.addEventListener('click', (e) => advanceImage(1) );
 
   const prev = el.querySelector('.lightbox-prev');
-  prev.addEventListener('click', (e) => {
-    state.set({ IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, -1).id });
-  });
+  prev.addEventListener('click', (e) => advanceImage(-1) );
+
+  function advanceImage(direction) {
+    state.set({
+      IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, direction).id 
+    });
+  }
 }
 
 function getSiblingImage(images, IMAGE_SHOWING, delta) {
