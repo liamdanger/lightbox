@@ -4,6 +4,7 @@
 
 body {
   color: rgba(0, 0, 0, 0.92);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 20px;
   margin: 0;
 }
@@ -52,6 +53,11 @@ input:focus {
 
 /* IMAGE GRID */
 
+.image-grid-error {
+  padding: 16px 24px;
+  text-align: center;
+}
+
 .image-grid {
   display: flex;
   flex-wrap: wrap;
@@ -86,7 +92,7 @@ input:focus {
   z-index: 2;
 }
 .lightbox-mask {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -95,6 +101,7 @@ input:focus {
   z-index: 1;
 }
 .lightbox-image {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
   display: block;
   height: auto;
   margin: 0 auto;

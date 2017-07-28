@@ -15,6 +15,8 @@ module.exports = (state) => {
 }
 
 function render(state) {
+  const { images, QUERY } = state.current;
+
   const renderImages = (images) => (
     images.map((image) => (`
       <li tabindex="0" id="${image.id}" class="image-grid-item">
@@ -23,11 +25,24 @@ function render(state) {
     ).join('')
   );
 
-  return `
-    <ul class="image-grid">
-      ${renderImages(state.current.images)}
-    </ul>
-  `;
+  // Nothing searched yet
+  if (!QUERY.length && !images.length) {
+    return `
+      <p class="image-grid-error">Search to see lots of wonderful GIFs!</p>
+    `;
+  // No results
+  } else if (QUERY.length && !images.length) {
+    return `
+      <p class="image-grid-error">No results found for "${QUERY}".</p>
+    `;
+  // Displaying results
+  } else {
+    return `
+      <ul class="image-grid">
+        ${renderImages(images)}
+      </ul>
+    `;
+  }
 }
 
 function bind(el, state) {
