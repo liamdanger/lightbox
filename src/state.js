@@ -12,12 +12,7 @@ module.exports = {
 
   // Merge new set of values to create new current state
   set: function(obj) {
-    const newState = Object.assign({}, this.current);
-
-    // Add/update properties on new state
-    Object.keys(obj).map((key) => {
-      newState[key] = obj[key]
-    });
+    const newState = Object.assign({}, this.current, obj);
 
     this._replaceState(newState);
 
@@ -28,17 +23,14 @@ module.exports = {
 
   // Returns true if any of the keys in the array differ from previous
   changed: function(props) {
-    let anyDifferent = false;
-
     for(let i = 0; i < props.length; i++) {
       const prop = props[i];
 
-      if (this.prev[prop] != this.current[prop]) {
-        anyDifferent = true;
-        break;
+      if (this.prev[prop] !== this.current[prop]) {
+        return true;
       }
     }
 
-    return anyDifferent;
+    return false;
   }
 }
