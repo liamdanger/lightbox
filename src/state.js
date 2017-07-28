@@ -8,8 +8,6 @@ module.exports = {
   _replaceState: function(newState) {
     this.prev    = this.current;
     this.current = newState;
-
-    console.log(this.current);
   },
 
   // Merge new set of values to create new current state

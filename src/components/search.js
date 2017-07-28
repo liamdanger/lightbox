@@ -8,7 +8,7 @@ module.exports = (state) => {
   bind(el, state);
 
   // If we have a query on load, submit it
-  const query = state.current.QUERY;
+  const { query } = state.current;
   if (query) { submitSearch(query, state); }
 
   return el;
@@ -23,7 +23,7 @@ function bind(el, state) {
 }
 
 function render(state) {
-  const query = state.current.QUERY;
+  const { query } = state.current;
 
   return `
     <form class="search-form">
@@ -44,13 +44,16 @@ function getQuery(e) {
 function submitSearch(query, state) {
   send('search:submit');
 
+  state.set({ LOADING: true });
+
   searchGifs(query)
     .then((images) => {
       state.set({
         images,
-        IMAGE_SHOWING: '',
+        imageShowing: '',
+        LOADING: false,
         LIGHTBOX_OPEN: false,
-        QUERY: query
+        query
       });
 
       history.pushState(state.current, `Search results for "${query}"`, `?q=${query}`);

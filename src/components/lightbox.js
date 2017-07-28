@@ -2,7 +2,7 @@ const { send, receive } = require('../events.js');
 
 module.exports = (state) => {
   const el = document.createElement('div');
-  const props = ['LIGHTBOX_OPEN', 'IMAGE_SHOWING'];
+  const props = ['LIGHTBOX_OPEN', 'imageShowing'];
 
   receive('state:change', () => {
     if (state.changed(props)) {
@@ -15,7 +15,7 @@ module.exports = (state) => {
 }
 
 function render(state) {
-  const { images, IMAGE_SHOWING, LIGHTBOX_OPEN } = state.current;
+  const { images, imageShowing, LIGHTBOX_OPEN } = state.current;
 
   const renderImage = (image) => (`
     <img class="lightbox-image" src="${image.original.url}" />
@@ -23,7 +23,7 @@ function render(state) {
 
   return `
     <div class="lightbox" ${LIGHTBOX_OPEN ? '' : 'hidden'}>
-      ${IMAGE_SHOWING ? renderImage(getCurrentImage(images, IMAGE_SHOWING)) : ''}
+      ${imageShowing ? renderImage(getCurrentImage(images, imageShowing)) : ''}
       <button title="Next" class="circle-button lightbox-button lightbox-next">🔜</button>
       <button title="Previous" class="circle-button lightbox-button lightbox-prev">🔙</button>
       <button title="Close" class="circle-button lightbox-button lightbox-close">❌</button>
@@ -33,7 +33,7 @@ function render(state) {
 }
 
 function bind(el, state) {
-  const { images, IMAGE_SHOWING } = state.current;
+  const { images, imageShowing } = state.current;
 
   const close = el.querySelector('.lightbox-close');
   close.addEventListener('click', (e) => {
@@ -48,13 +48,13 @@ function bind(el, state) {
 
   function advanceImage(direction) {
     state.set({
-      IMAGE_SHOWING: getSiblingImage(images, IMAGE_SHOWING, direction).id 
+      imageShowing: getSiblingImage(images, imageShowing, direction).id 
     });
   }
 }
 
-function getSiblingImage(images, IMAGE_SHOWING, delta) {
-  const image = getCurrentImage(images, IMAGE_SHOWING);
+function getSiblingImage(images, imageShowing, delta) {
+  const image = getCurrentImage(images, imageShowing);
   let position = images.indexOf(image) + delta;
 
   if (position >= images.length) { position = 0 }
@@ -63,6 +63,6 @@ function getSiblingImage(images, IMAGE_SHOWING, delta) {
   return images[position];
 }
 
-function getCurrentImage(images, IMAGE_SHOWING) {
-  return images.find((image) => image.id == IMAGE_SHOWING);
+function getCurrentImage(images, imageShowing) {
+  return images.find((image) => image.id == imageShowing);
 }

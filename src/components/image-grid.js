@@ -15,7 +15,7 @@ module.exports = (state) => {
 }
 
 function render(state) {
-  const { images, QUERY } = state.current;
+  const { images, query } = state.current;
 
   const renderImages = (images) => (
     images.map((image) => (`
@@ -26,14 +26,14 @@ function render(state) {
   );
 
   // Nothing searched yet
-  if (!QUERY.length && !images.length) {
+  if (!query.length && !images.length) {
     return `
       <p class="image-grid-error">Search to see lots of wonderful GIFs!</p>
     `;
   // No results
-  } else if (QUERY.length && !images.length) {
+  } else if (query.length && !images.length) {
     return `
-      <p class="image-grid-error">No results found for "${QUERY}".</p>
+      <p class="image-grid-error">No results found for "${query}".</p>
     `;
   // Displaying results
   } else {
@@ -52,7 +52,7 @@ function bind(el, state) {
     image.addEventListener('click', (e) => {
       state.set({ 
         LIGHTBOX_OPEN: true, 
-        IMAGE_SHOWING: image.id 
+        imageShowing: image.id 
       });
     });
   });
