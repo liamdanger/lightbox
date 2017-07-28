@@ -5,14 +5,14 @@ const search = require('./components/search.js');
 const imageGrid = require('./components/image-grid.js');
 const lightbox = require('./components/lightbox.js');
 
-const query = decodeURI(window.location.search.split('q=')[1]) || '';
+const query = window.location.search.replace('?q=', '') || '';
 
 // Set initial app state
 state.set({
   LOADING: false,
   LIGHTBOX_OPEN: false,
   imageShowing: '',
-  query,
+  query: decodeURI(query.trim()),
   images: []
 });
 
