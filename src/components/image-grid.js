@@ -1,4 +1,4 @@
-const { send, receive } = require('../events.js');
+const { send, receive, click } = require('../events.js');
 
 module.exports = (state) => {
   const el = document.createElement('div');
@@ -49,7 +49,7 @@ function bind(el, state) {
   const images = el.querySelectorAll('.image-grid-item');
 
   images.forEach((image) => {
-    image.addEventListener('click', (e) => {
+    click(image, (e) => {
       state.set({ 
         LIGHTBOX_OPEN: true, 
         imageShowing: image.id 

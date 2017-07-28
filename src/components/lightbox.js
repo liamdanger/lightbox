@@ -1,4 +1,4 @@
-const { send, receive } = require('../events.js');
+const { send, receive, click } = require('../events.js');
 
 module.exports = (state) => {
   const el = document.createElement('div');
@@ -36,15 +36,14 @@ function bind(el, state) {
   const { images, imageShowing } = state.current;
 
   const close = el.querySelector('.lightbox-close');
-  close.addEventListener('click', (e) => {
-    state.set({ LIGHTBOX_OPEN: false });
-  });
-
+  const mask = el.querySelector('.lightbox-mask');
   const next = el.querySelector('.lightbox-next');
-  next.addEventListener('click', (e) => advanceImage(1) );
-
   const prev = el.querySelector('.lightbox-prev');
-  prev.addEventListener('click', (e) => advanceImage(-1) );
+
+  click( close, () => state.set({ LIGHTBOX_OPEN: false }) );
+  click( mask,  () => state.set({ LIGHTBOX_OPEN: false }) );
+  click( next,  () => advanceImage(1) );
+  click( prev,  () => advanceImage(-1) );
 
   function advanceImage(direction) {
     state.set({

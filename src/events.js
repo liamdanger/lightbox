@@ -6,5 +6,13 @@ module.exports = {
 
   receive: (name, callback) => {
     document.addEventListener(name, callback);
+  },
+
+  submit: (el, callback) => {
+    el.addEventListener('submit', callback);
+  },
+
+  click: (el, callback) => {
+    el.addEventListener('click', callback);
   }
 }
