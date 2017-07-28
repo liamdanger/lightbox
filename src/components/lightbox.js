@@ -1,20 +1,10 @@
-const { send, receive, click } = require('../events.js');
+const Component = require('../component.js');
+const state = require('../state.js');
+const { click } = require('../events.js');
 
-module.exports = (state) => {
-  const el = document.createElement('div');
-  const props = ['LIGHTBOX_OPEN', 'imageShowing'];
+const Lightbox = new Component(state, ['LIGHTBOX_OPEN', 'imageShowing']);
 
-  receive('state:change', () => {
-    if (state.changed(props)) {
-      el.innerHTML = render(state);
-      bind(el, state);
-    }
-  });
-
-  return el;
-}
-
-function render(state) {
+Lightbox.render = function(state) {
   const { images, imageShowing, LIGHTBOX_OPEN } = state.current;
 
   const renderImage = (image) => (`
@@ -32,13 +22,13 @@ function render(state) {
   `;
 }
 
-function bind(el, state) {
+Lightbox.bind = function(state) {
   const { images, imageShowing } = state.current;
 
-  const close = el.querySelector('.lightbox-close');
-  const mask = el.querySelector('.lightbox-mask');
-  const next = el.querySelector('.lightbox-next');
-  const prev = el.querySelector('.lightbox-prev');
+  const close = this.el.querySelector('.lightbox-close');
+  const mask = this.el.querySelector('.lightbox-mask');
+  const next = this.el.querySelector('.lightbox-next');
+  const prev = this.el.querySelector('.lightbox-prev');
 
   click( close, () => state.set({ LIGHTBOX_OPEN: false }) );
   click( mask,  () => state.set({ LIGHTBOX_OPEN: false }) );
@@ -65,3 +55,5 @@ function getSiblingImage(images, imageShowing, delta) {
 function getCurrentImage(images, imageShowing) {
   return images.find((image) => image.id == imageShowing);
 }
+
+module.exports = Lightbox;

@@ -1,32 +1,25 @@
+const Component = require('../component.js');
+const state = require('../state.js');
+const { send, submit } = require('../events.js');
 const searchGifs = require('../giphy.js');
-const { send, receive, submit } = require('../events.js');
 
-module.exports = (state) => {
-  const el = document.createElement('div');
+const Search = new Component(state, ['LOADING']);
 
-  el.innerHTML = render(state);
-  bind(el, state);
-
-  // If we have a query on load, submit it
-  const { query } = state.current;
-  if (query) { submitSearch(query, state); }
-
-  return el;
-}
-
-function bind(el, state) {
-  const form = el.querySelector('.search-form');
+Search.bind = function(state) {
+  const form = this.el.querySelector('.search-form');
 
   submit(form, (e) => submitSearch(getQuery(e), state) );
 }
 
-function render(state) {
-  const { query } = state.current;
+Search.render = function(state) {
+  const { query, LOADING } = state.current;
+
+  if (this.first && query) { submitSearch(query, state); }
 
   return `
     <form class="search-form">
-      <input value="${query}" placeholder="Search for GIFs!" class="search-form-field" id="search-form-q" name="q" type="search" />
-      <button class="search-form-button" title="Search">🔍</button>
+      <input ${LOADING ? 'disabled' : ''} value="${query}" placeholder="Search for GIFs!" class="search-form-field" id="search-form-q" name="q" type="search" />
+      <button ${LOADING ? 'disabled' : ''} class="search-form-button" title="Search">🔍</button>
     </form>
   `;
 }
@@ -58,3 +51,4 @@ function submitSearch(query, state) {
     });
 }
 
+module.exports = Search;

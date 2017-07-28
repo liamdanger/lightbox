@@ -1,20 +1,10 @@
-const { send, receive, click } = require('../events.js');
+const Component = require('../component.js');
+const state = require('../state.js');
+const { click } = require('../events.js');
 
-module.exports = (state) => {
-  const el = document.createElement('div');
-  const props = ["images"];
+const ImageGrid = new Component(state, ['images']);
 
-  receive('state:change', () => {
-    if (state.changed(props)) {
-      el.innerHTML = render(state);
-      bind(el, state);
-    }
-  });
-
-  return el;
-}
-
-function render(state) {
+ImageGrid.render = function(state) {
   const { images, query } = state.current;
 
   const renderImages = (images) => (
@@ -45,8 +35,8 @@ function render(state) {
   }
 }
 
-function bind(el, state) {
-  const images = el.querySelectorAll('.image-grid-item');
+ImageGrid.bind = function(state) {
+  const images = this.el.querySelectorAll('.image-grid-item');
 
   images.forEach((image) => {
     click(image, (e) => {
@@ -57,3 +47,5 @@ function bind(el, state) {
     });
   });
 }
+
+module.exports = ImageGrid;

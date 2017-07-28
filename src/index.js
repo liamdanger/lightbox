@@ -1,24 +1,25 @@
 const state = require('./state.js');
-window.state = state;
 
-const search = require('./components/search.js');
-const imageGrid = require('./components/image-grid.js');
-const lightbox = require('./components/lightbox.js');
+const Search = require('./components/search.js');
+const ImageGrid = require('./components/image-grid.js');
+const Lightbox = require('./components/lightbox.js');
 
-const query = window.location.search.replace('?q=', '') || '';
+// If there's a query already, set it to render
+const query = decodeURI(window.location.search.replace('?q=', '').trim()) || '';
 
 // Set initial app state
 state.set({
   LOADING: false,
   LIGHTBOX_OPEN: false,
   imageShowing: '',
-  query: decodeURI(query.trim()),
+  query,
   images: []
 });
 
 const main = document.createElement('main');
-main.appendChild(search(state));
-main.appendChild(imageGrid(state));
-main.appendChild(lightbox(state));
+main.appendChild(Search.el);
+main.appendChild(ImageGrid.el);
+main.appendChild(Lightbox.el);
+
 
 document.body.appendChild(main);
