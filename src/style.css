@@ -19,7 +19,7 @@ button:focus,
 input:focus { 
   outline: 0;
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.16),
-              0 0 0 3px #849dcd;
+              0 0 0 5px #849dcd;
   transition: box-shadow 0.25s ease;
 }
 

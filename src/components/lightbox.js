@@ -24,9 +24,9 @@ function render(state) {
   return `
     <div class="lightbox" ${LIGHTBOX_OPEN ? '' : 'hidden'}>
       ${IMAGE_SHOWING ? renderImage(getCurrentImage(images, IMAGE_SHOWING)) : ''}
-      <button title="Close" class="circle-button lightbox-button lightbox-close">❌</button>
-      <button title="Previous" class="circle-button lightbox-button lightbox-prev">🔙</button>
       <button title="Next" class="circle-button lightbox-button lightbox-next">🔜</button>
+      <button title="Previous" class="circle-button lightbox-button lightbox-prev">🔙</button>
+      <button title="Close" class="circle-button lightbox-button lightbox-close">❌</button>
     </div>
     <div class="lightbox-mask" ${LIGHTBOX_OPEN ? '' : 'hidden'} />
   `;
