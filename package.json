@@ -2,7 +2,6 @@
   "name": "patreon-lightbox",
   "version": "1.0.0",
   "description": "take-home assignment",
-  "main": "index.js",
   "scripts": {
     "dev": "budo ./src/index.js -t es2040 --css ./src/style.css",
     "start": "serve ./dist --single",
