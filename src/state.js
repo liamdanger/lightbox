@@ -16,8 +16,6 @@ module.exports = {
 
     this._replaceState(newState);
 
-    console.log(newState);
-
     send('state:change');
 
     return newState;
