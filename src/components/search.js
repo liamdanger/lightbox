@@ -8,7 +8,7 @@ const Search = new Component(state, ['LOADING']);
 Search.bind = function(state) {
   const form = this.el.querySelector('.search-form');
 
-  submit(form, (e) => submitSearch(getQuery(e), state) );
+  submit(form, (e) => submitSearch(this.getQuery(e), state) );
 }
 
 Search.render = function(state) {
@@ -24,12 +24,10 @@ Search.render = function(state) {
   `;
 }
 
-function getQuery(e) {
+Search.getQuery = function(e) {
   e.preventDefault();
 
-  const input = document.getElementById('search-form-q');
-
-  return input.value;
+  return this.el.querySelector('#search-form-q').value;
 }
 
 function submitSearch(query, state) {
