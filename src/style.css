@@ -134,8 +134,10 @@ input:focus {
   border: 0;
   border-radius: 100%;
   background-color: #fff;
+  display: flex;
   font-size: 20px;
   height: 48px;
-  width: 48px;
+  justify-content: center;
   text-align: center;
+  width: 48px;
 }
