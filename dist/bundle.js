@@ -192,15 +192,17 @@ Search.getQuery = function (e) {
 function submitSearch(query, state) {
   send('search:submit');
 
-  state.set({ LOADING: true });
+  state.set({
+    LOADING: true,
+    query: query
+  });
 
   searchGifs(query).then(function (images) {
     state.set({
       images: images,
       imageShowing: '',
       LOADING: false,
-      LIGHTBOX_OPEN: false,
-      query: query
+      LIGHTBOX_OPEN: false
     });
 
     history.pushState(state.current, 'Search results for "' + query + '"', '?q=' + query);

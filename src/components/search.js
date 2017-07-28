@@ -33,7 +33,10 @@ Search.getQuery = function(e) {
 function submitSearch(query, state) {
   send('search:submit');
 
-  state.set({ LOADING: true });
+  state.set({
+    LOADING: true,
+    query
+  });
 
   searchGifs(query)
     .then((images) => {
@@ -41,8 +44,7 @@ function submitSearch(query, state) {
         images,
         imageShowing: '',
         LOADING: false,
-        LIGHTBOX_OPEN: false,
-        query
+        LIGHTBOX_OPEN: false
       });
 
       history.pushState(state.current, `Search results for "${query}"`, `?q=${query}`);
