@@ -10,6 +10,7 @@ state.set({
   LOADING: false,
   LIGHTBOX_OPEN: false,
   IMAGE_SHOWING: '',
+  QUERY: window.location.search.split('q=')[1] || '',
   images: []
 });
 
