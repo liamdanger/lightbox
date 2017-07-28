@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "budo ./src/index.js -t es2040 --css ./src/style.css",
+    "start": "serve ./dist --single",
     "build": "browserify ./src/index.js -t es2040 -o ./dist/bundle.js && cp ./src/style.css ./dist/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +15,8 @@
     "browserify": "^14.4.0",
     "budo": "^10.0.4",
     "es2040": "^1.2.6"
+  },
+  "dependencies": {
+    "serve": "^6.0.3"
   }
 }

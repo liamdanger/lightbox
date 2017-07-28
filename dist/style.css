@@ -1,32 +1,141 @@
+/* BASE AND RESET */
+
 * { box-sizing: border-box; }
 
 body {
+  color: rgba(0, 0, 0, 0.92);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 20px;
   margin: 0;
 }
 
-.search-form {
-  background-color: #f484a1;
+input,
+button{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.16);
+}
+button:focus,
+input:focus { 
+  outline: 0;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.16),
+              0 0 0 5px #849dcd;
+  transition: box-shadow 0.25s ease;
+}
 
-  padding: 24px;
+/* SEARCH FORM */
+
+.search-form {
+  background-color: #fac2d0;
   display: flex;
+  justify-content: center;
+  padding: 24px;
   width: 100%;
 }
 
 .search-form-field {
-  appearance: none;
   border: 0;
-  border-radius: 7px;
-
+  border-radius: 8px;
   flex-grow: 1;
-}
-.search-form-field:focus { 
-  outline: 0; 
+  font-size: 16px;
+  padding: 12px 16px;
+  margin-right: 16px;
+  max-width: 512px;
 }
 
 .search-form-button {
-  appearance: none;
-  border: 3px solid #939acb;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 0;
+  border-radius: 8px;
+  font-size: 20px;
+  padding: 8px 12px;
+}
+
+/* IMAGE GRID */
+
+.image-grid-error {
+  padding: 16px 24px;
+  text-align: center;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 16px 24px;
+}
+
+.image-grid-item {
+  cursor: pointer;
+  margin: 24px 16px;
+  transition: transform 0.25s ease;
+}
+.image-grid-item:hover,
+.image-grid-item:focus {
+  outline: 0;
+  transform: scale(1.1);
+}
+.image-grid-item img {
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.16);
+  display: block;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+  max-width: 90%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%); /* Centering hack */
+  z-index: 2;
+}
+.lightbox-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.lightbox-image {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+
+  /* Making sure a not-yet-loaded image still has dimension */
+  min-height: 64px;
+  min-width: 64px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.lightbox-button {
+  position: absolute;
+}
+.lightbox-close {
+  top: -24px;
+  right: -24px;
+}
+.lightbox-prev {
+  bottom: -24px;
+  left: -24px;
+}
+.lightbox-next {
+  bottom: -24px;
+  right: -24px;
+}
+
+/* GENERICS AND UTILITES */
+
+.circle-button {
+  border: 0;
+  border-radius: 100%;
   background-color: #fff;
-  font-size: 32px;
+  font-size: 20px;
+  height: 48px;
+  width: 48px;
+  text-align: center;
 }
