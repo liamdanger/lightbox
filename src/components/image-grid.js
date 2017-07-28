@@ -38,14 +38,14 @@ ImageGrid.render = function(state) {
 ImageGrid.bind = function(state) {
   const images = this.el.querySelectorAll('.image-grid-item');
 
-  images.forEach((image) => {
+  for (let image of images) {
     click(image, (e) => {
       state.set({ 
         LIGHTBOX_OPEN: true, 
         imageShowing: image.id 
       });
     });
-  });
+  }
 }
 
 module.exports = ImageGrid;
