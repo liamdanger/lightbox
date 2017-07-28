@@ -27,5 +27,5 @@ function formatResponse(response) {
 }
 
 function constructRequest(key, q) {
-  return `${API_HOST}${API_SEARCH_PATH}?api_key=${key}&q=${q}`;
+  return `${API_HOST}${API_SEARCH_PATH}?api_key=${key}&q=${q}&rating=g`;
 }
