@@ -26,12 +26,12 @@ function render(state) {
   );
 
   // Nothing searched yet
-  if (!query.length && !images.length) {
+  if (query.length < 1 && images.length < 1) {
     return `
       <p class="image-grid-error">Search to see lots of wonderful GIFs!</p>
     `;
   // No results
-  } else if (query.length && !images.length) {
+  } else if (query.length < 1 && images.length > 0) {
     return `
       <p class="image-grid-error">No results found for "${query}".</p>
     `;
